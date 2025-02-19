@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>All Flashcards</h1>
+
+    <div class="container">
+        {% if flashcards %}
+            {% for flashcard in flashcards %}
+                <div class="flashcard">
+                    <div class="card">
+                        <div class="front">
+                            <p><strong>Question:</strong> {{ flashcard.question }}</p>
+                        </div>
+                        <div class="back">
+                            <p><strong>Answer:</strong> {{ flashcard.answer }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No flashcards available. <a href="/">Add some!</a></p>
+        {% endif %}
+    </div>
+
+    <br>
+    <a href="/"><button>Go Back</button></a>
+
+    <script>
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('flipped');
+            });
+        });
+    </script>
+</body>
+</html>
